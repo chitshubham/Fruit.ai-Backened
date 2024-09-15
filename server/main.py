@@ -156,20 +156,6 @@ def translate_text():
         return jsonify({'translated_text': translated.text}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-@app.route('/faqs/search', methods=['GET'])
-def search_faqs():
-    try:
-        query = request.args.get('q', '')
-        search_results = faqs_collection.find({
-            '$or': [
-                {'question': {'$regex': query, '$options': 'i'}},
-                {'answer': {'$regex': query, '$options': 'i'}}
-            ]
-        })
-        faqs = [{'id': str(faq['_id']), 'question': faq['question'], 'answer': faq['answer']} for faq in search_results]
 
-        return jsonify(faqs)
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 if __name__ == '__main__':
     app.run(debug=True)
