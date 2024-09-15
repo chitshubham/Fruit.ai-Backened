@@ -8,6 +8,7 @@ import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
 from googletrans import Translator
 from dotenv import load_dotenv
+import os
 load_dotenv()
 app = Flask(__name__)
 translator = Translator()
